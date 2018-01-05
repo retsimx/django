@@ -347,14 +347,14 @@ class FileSystemStorage(Storage):
                     fd = os.open(full_path, flags, 0o666)
                     _file = None
                     try:
-                        locks.lock(fd, locks.LOCK_EX)
+                        #locks.lock(fd, locks.LOCK_EX)
                         for chunk in content.chunks():
                             if _file is None:
                                 mode = 'wb' if isinstance(chunk, bytes) else 'wt'
                                 _file = os.fdopen(fd, mode)
                             _file.write(chunk)
                     finally:
-                        locks.unlock(fd)
+                        #locks.unlock(fd)
                         if _file is not None:
                             _file.close()
                         else:
